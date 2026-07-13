@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        arabic: ["arabic", "shamel", "sans-serif"],
+        arabic: ["Tajawal", "sans-serif"],
+        sans: ["Tajawal", "system-ui", "sans-serif"],
       },
     },
   },

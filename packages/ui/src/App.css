@@ -1,10 +1,24 @@
+/* Tajawal — a modern, open-source (SIL OFL) Arabic + Latin typeface. */
 @font-face {
-  font-family: "arabic";
-  src: url(./assets/fonts/arabic/BoutrosNewsH1-Bold.ttf) format("truetype");
+  font-family: "Tajawal";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url(./assets/fonts/tajawal/Tajawal-Regular.ttf) format("truetype");
 }
 @font-face {
-  font-family: "shamel";
-  src: url(./assets/fonts/arabic/shamel.ttf) format("truetype");
+  font-family: "Tajawal";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url(./assets/fonts/tajawal/Tajawal-Medium.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Tajawal";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url(./assets/fonts/tajawal/Tajawal-Bold.ttf) format("truetype");
 }
 
 .App {
@@ -12,11 +26,12 @@
   min-width: 480px;
   min-height: 800px;
   border-radius: 20px;
+  font-family: "Tajawal", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 .app-title {
-  font-family: arabic;
-  font-weight: black;
+  font-family: "Tajawal", sans-serif;
+  font-weight: 700;
 }
 
 ::-webkit-scrollbar {

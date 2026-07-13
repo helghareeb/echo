@@ -30,13 +30,11 @@ Transcription uses Meta's Wit.ai (https://wit.ai), a free hosted service, via a
 user-supplied token. Wit.ai is a service, not bundled code, and is governed by
 Meta's own terms.
 
-Fonts (ACTION NEEDED)
----------------------
-The Arabic display fonts recovered from the original app
-(BoutrosNewsH1-Bold.ttf, shamel.ttf) are of UNKNOWN license and are included
-only as a temporary visual match. Before distributing official binaries, these
-should be replaced with a freely/openly licensed Arabic font (e.g. an SIL OFL
-font such as "Cairo", "Tajawal", or "Amiri"). See the roadmap.
+Fonts
+-----
+The UI uses the "Tajawal" typeface by Boutros™ International, licensed under the
+SIL Open Font License 1.1. The license text ships alongside the fonts at
+packages/ui/src/assets/fonts/tajawal/OFL.txt .
 
 Original app
 ------------
