@@ -28,6 +28,15 @@ jobs:
         run: pnpm --filter @sada/desktop dist
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Code signing is applied automatically IF these secrets are set;
+          # otherwise builds are produced unsigned. See docs/BUILD.md.
+          # Windows / macOS certificate (base64 .pfx/.p12 or URL) + password:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          # macOS notarization (Apple Developer ID):
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
       - name: Attach installers to the release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2

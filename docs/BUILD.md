@@ -49,3 +49,21 @@ Builds are **unsigned** by default:
 
 Cross-OS note: macOS installers must be built on macOS (native binaries +
 notarization). CI uses a `macos-latest` runner for that.
+
+### Signing in CI (recommended once you have a certificate)
+
+The release workflow reads these **repository secrets** and signs automatically
+when they are present (otherwise it builds unsigned):
+
+| Secret | Purpose |
+|--------|---------|
+| `CSC_LINK` | base64 of your `.pfx`/`.p12` code-signing certificate (Windows + macOS) |
+| `CSC_KEY_PASSWORD` | certificate password |
+| `APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD`, `APPLE_TEAM_ID` | macOS notarization |
+
+Add them under **Settings → Secrets and variables → Actions**, then push a
+version tag — the resulting installers will be signed (and macOS notarized).
+
+> Note: a code-signing certificate must be purchased from a CA (e.g. DigiCert,
+> Sectigo) or, for macOS, requires a paid Apple Developer account. Self-signed
+> certificates do **not** remove SmartScreen/Gatekeeper warnings.

@@ -7,14 +7,16 @@
 Free, open-source, cross-platform audio-to-subtitle transcription, tuned for Arabic.
 A community restoration of the discontinued **almufragh (المفرغ)** app.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Web-4c9)](#-download--التحميل)
-[![Built with Electron](https://img.shields.io/badge/Electron-2C2E3B?logo=electron&logoColor=9FEAF9)](https://www.electronjs.org/)
+[![CI](https://github.com/helghareeb/echo/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/helghareeb/echo/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/helghareeb/echo?sort=semver&color=success)](https://github.com/helghareeb/echo/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/helghareeb/echo/total?color=4c9)](https://github.com/helghareeb/echo/releases)
+[![License: MIT](https://img.shields.io/github/license/helghareeb/echo?color=yellow)](LICENSE)
+[![Platforms](https://img.shields.io/badge/platform-Windows%20|%20macOS%20|%20Linux%20|%20Web-4c9)](https://github.com/helghareeb/echo/releases/latest)
+[![Electron](https://img.shields.io/badge/Electron-2C2E3B?logo=electron&logoColor=9FEAF9)](https://www.electronjs.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Speech: Wit.ai](https://img.shields.io/badge/speech-Wit.ai%20(free)-00B0FF)](https://wit.ai)
+[![Speech: Wit.ai](https://img.shields.io/badge/speech-Wit.ai%20free-00B0FF)](https://wit.ai)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![CI](https://github.com/helghareeb/echo/actions/workflows/ci.yml/badge.svg)](https://github.com/helghareeb/echo/actions/workflows/ci.yml)
 
 </div>
 
