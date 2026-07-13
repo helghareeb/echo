@@ -1,0 +1,45 @@
+Sada (صدى) — third-party notices
+=================================
+
+Sada itself is licensed under the MIT License (see LICENSE). It bundles and/or
+depends on the following third-party components, each under its own license.
+
+Runtime / bundled
+-----------------
+- Electron .......... MIT (bundles Chromium and Node.js; see their notices)
+- React, React DOM .. MIT
+- daisyUI ........... MIT
+- Tailwind CSS ...... MIT
+- FontAwesome (free) . icons CC BY 4.0, fonts SIL OFL 1.1, code MIT
+- react-dropzone .... MIT
+- react-localization  MIT
+- fluent-ffmpeg ..... MIT
+
+ffmpeg / ffprobe
+----------------
+The desktop app ships the ffmpeg and ffprobe binaries provided by the
+@ffmpeg-installer/ffmpeg and @ffprobe-installer/ffprobe packages, and the web
+app uses ffmpeg.wasm. ffmpeg is licensed under the LGPL/GPL depending on build
+configuration. These binaries are distributed unmodified. Their source and
+license are available from https://ffmpeg.org . If you redistribute Sada
+builds, keep this notice and provide access to the corresponding ffmpeg source.
+
+Speech service
+--------------
+Transcription uses Meta's Wit.ai (https://wit.ai), a free hosted service, via a
+user-supplied token. Wit.ai is a service, not bundled code, and is governed by
+Meta's own terms.
+
+Fonts (ACTION NEEDED)
+---------------------
+The Arabic display fonts recovered from the original app
+(BoutrosNewsH1-Bold.ttf, shamel.ttf) are of UNKNOWN license and are included
+only as a temporary visual match. Before distributing official binaries, these
+should be replaced with a freely/openly licensed Arabic font (e.g. an SIL OFL
+font such as "Cairo", "Tajawal", or "Amiri"). See the roadmap.
+
+Original app
+------------
+Sada is an independent community restoration of the free "almufragh" (المفرغ)
+application. All original trademarks and names belong to their respective
+owners.

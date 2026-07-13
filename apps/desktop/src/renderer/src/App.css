@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "arabic";
+  src: url(./assets/fonts/arabic/BoutrosNewsH1-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "shamel";
+  src: url(./assets/fonts/arabic/shamel.ttf) format("truetype");
+}
+
+.App {
+  text-align: center;
+  min-width: 480px;
+  min-height: 800px;
+  border-radius: 20px;
+}
+
+.app-title {
+  font-family: arabic;
+  font-weight: black;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Frameless-window drag region for the custom title bar. */
+.title-bar {
+  -webkit-app-region: drag;
+  height: 20px;
+  width: 100%;
+}
+button,
+input,
+select,
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+section {
+  border-radius: 0 0 50% 50%;
+  min-height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

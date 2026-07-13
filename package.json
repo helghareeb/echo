@@ -1,0 +1,27 @@
+{
+  "name": "sada",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sada (صدى) — free, open-source, cross-platform audio-to-subtitle transcription. A community restoration of the discontinued almufragh app.",
+  "license": "MIT",
+  "packageManager": "pnpm@9.12.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helghareeb/echo.git"
+  },
+  "keywords": ["transcription", "subtitles", "srt", "arabic", "wit.ai", "electron", "speech-to-text"],
+  "author": "Sada contributors",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter \"./packages/**\" build",
+    "test": "pnpm -r test",
+    "dev:desktop": "pnpm --filter @sada/desktop dev",
+    "dev:web": "pnpm --filter @sada/web dev",
+    "lint": "echo \"(add eslint here)\" && exit 0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

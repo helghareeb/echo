@@ -1,0 +1,38 @@
+appId: dev.sada.app
+productName: Sada
+copyright: Copyright © 2026 Sada contributors
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**
+  - "!**/*.map"
+# ffmpeg/ffprobe ship as per-OS native binaries; keep them unpacked so they are
+# executable at runtime, and resolve the .unpacked path in main/ffmpeg.js.
+asarUnpack:
+  - "**/@ffmpeg-installer/**"
+  - "**/@ffprobe-installer/**"
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+  icon: build/icon.png
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+mac:
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+  icon: build/icon.png
+  category: public.app-category.productivity
+linux:
+  target:
+    - AppImage
+    - deb
+  icon: build/icon.png
+  category: AudioVideo
+# No code-signing configured by default — builds are unsigned. See docs/BUILD.md.

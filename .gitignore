@@ -1,0 +1,19 @@
+node_modules/
+dist/
+out/
+.turbo/
+coverage/
+*.log
+.DS_Store
+Thumbs.db
+
+# Electron build output
+apps/desktop/release/
+
+# Local env
+.env
+.env.local
+
+# Recovered original (kept out of git history by default; see _original/README.md)
+# Comment the next line out if you want to commit the recovered reference source.
+_original/
