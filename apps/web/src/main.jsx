@@ -1,3 +1,4 @@
+import "./installBridge"; // must run before @sada/ui is imported
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { App, ContextWrapper } from "@sada/ui";

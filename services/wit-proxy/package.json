@@ -1,0 +1,16 @@
+{
+  "name": "@sada/wit-proxy",
+  "version": "1.0.0",
+  "description": "CORS proxy that lets the Sada web app reach Meta's Wit.ai speech API.",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "wrangler deploy",
+    "dev:worker": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^3.78.0"
+  }
+}

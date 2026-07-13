@@ -1,0 +1,7 @@
+name = "sada-wit-proxy"
+main = "src/worker.js"
+compatibility_date = "2024-09-01"
+
+# Deploy with:  npx wrangler deploy
+# Then set VITE_WIT_PROXY_URL to the deployed URL when building the web app, e.g.
+#   VITE_WIT_PROXY_URL="https://sada-wit-proxy.<your-subdomain>.workers.dev" pnpm --filter @sada/web build

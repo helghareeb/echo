@@ -1,0 +1,24 @@
+{
+  "name": "@sada/ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared React UI for Sada — consumed by both the desktop and web apps through the window.sada bridge contract.",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./App.css": "./src/App.css"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "react-dropzone": "^14.2.3",
+    "react-localization": "^1.0.19"
+  }
+}

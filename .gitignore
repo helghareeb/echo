@@ -10,6 +10,9 @@ Thumbs.db
 # Electron build output
 apps/desktop/release/
 
+# ffmpeg.wasm core copied into the web app's public dir at build time
+apps/web/public/ffmpeg/
+
 # Local env
 .env
 .env.local

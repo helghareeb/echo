@@ -8,6 +8,7 @@ import react from "@vitejs/plugin-react";
 // (externalizeDepsPlugin keeps package.json `dependencies` external) so their
 // per-OS binaries resolve at runtime.
 const coreEntry = resolve(__dirname, "../../packages/core/dist/index.js");
+const uiEntry = resolve(__dirname, "../../packages/ui/src/index.js");
 
 export default defineConfig({
   main: {
@@ -18,7 +19,11 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()],
   },
   renderer: {
-    resolve: { alias: { "@sada/core": coreEntry } },
+    resolve: {
+      alias: { "@sada/core": coreEntry, "@sada/ui": uiEntry },
+      // Ensure a single React instance across the app + aliased UI package.
+      dedupe: ["react", "react-dom"],
+    },
     plugins: [react()],
   },
 });

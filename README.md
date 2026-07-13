@@ -87,10 +87,23 @@ pnpm --filter @sada/desktop dist
 
 ```
 packages/core     # environment-agnostic pipeline (TypeScript, unit-tested)
+packages/ui       # shared React UI (used by both apps via the window.sada bridge)
 apps/desktop      # Electron app (electron-vite + React)
-apps/web          # browser app (Vite + ffmpeg.wasm)      [in progress]
-services/wit-proxy# CORS proxy for the web app             [in progress]
+apps/web          # browser app (Vite + ffmpeg.wasm)
+services/wit-proxy# CORS proxy for the web app (Cloudflare Worker / Node)
 ```
+
+### 🌐 Run the web app
+
+```bash
+pnpm build            # build @sada/core
+pnpm dev:web          # Vite dev server on http://localhost:5173
+```
+
+In dev, requests to Wit.ai are proxied for you (no CORS setup needed). For a
+production deploy, host the small [wit-proxy](services/wit-proxy) and build with
+`VITE_WIT_PROXY_URL` pointing at it. The web app uses **ffmpeg.wasm**, so it is
+slower than the desktop app and best for shorter files.
 
 The transcription logic (clip planning, timeline stitching, subtitle grouping,
 Wit.ai request/parse) lives once in `@sada/core` and is shared by every target
