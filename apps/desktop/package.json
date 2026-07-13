@@ -4,16 +4,20 @@
   "description": "Sada desktop app (Windows/macOS/Linux) — free, open-source audio-to-subtitle transcription.",
   "license": "MIT",
   "author": "Sada contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helghareeb/echo.git"
+  },
   "main": "out/main/index.js",
   "scripts": {
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "start": "electron-vite preview",
     "pack:dir": "electron-vite build && electron-builder --dir",
-    "dist": "electron-vite build && electron-builder",
-    "dist:win": "electron-vite build && electron-builder --win",
-    "dist:mac": "electron-vite build && electron-builder --mac",
-    "dist:linux": "electron-vite build && electron-builder --linux"
+    "dist": "electron-vite build && electron-builder --publish never",
+    "dist:win": "electron-vite build && electron-builder --win --publish never",
+    "dist:mac": "electron-vite build && electron-builder --mac --publish never",
+    "dist:linux": "electron-vite build && electron-builder --linux --publish never"
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
