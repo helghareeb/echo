@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Sada desktop app (Windows/macOS/Linux) — free, open-source audio-to-subtitle transcription.",
   "license": "MIT",
-  "author": "Sada contributors",
+  "author": {
+    "name": "Sada contributors",
+    "email": "helghareeb@users.noreply.github.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/helghareeb/echo.git"
