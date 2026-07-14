@@ -23,6 +23,9 @@ importers:
       fluent-ffmpeg:
         specifier: ^2.1.3
         version: 2.1.3
+      which:
+        specifier: ^1.3.1
+        version: 1.3.1
     devDependencies:
       '@sada/core':
         specifier: workspace:*

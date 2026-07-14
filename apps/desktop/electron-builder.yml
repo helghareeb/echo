@@ -19,10 +19,24 @@ win:
     - target: portable
       arch: [x64]
   icon: build/icon.png
+# The portable exe installs nothing and registers no uninstaller. Give it a clearly
+# different name so it can't be mistaken for the installer (Sada-Portable-x.y.z.exe).
+portable:
+  artifactName: ${productName}-Portable-${version}.${ext}
 nsis:
   oneClick: false
   perMachine: false
   allowToChangeInstallationDirectory: true
+  # Installer registers an uninstaller in Add/Remove Programs and Start Menu.
+  artifactName: ${productName}-Setup-${version}.${ext}
+  uninstallDisplayName: Sada · صدى
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  menuCategory: Sada
+  # Keep the user's saved Wit.ai token / settings if they reinstall later.
+  deleteAppDataOnUninstall: false
+  # Adds an explicit "Uninstall Sada" Start Menu shortcut (see build/installer.nsh).
+  include: build/installer.nsh
 mac:
   target:
     - target: dmg
