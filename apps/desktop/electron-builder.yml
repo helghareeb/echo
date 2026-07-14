@@ -35,4 +35,9 @@ linux:
     - deb
   icon: build/icon.png
   category: AudioVideo
+  # The npm package is scoped (@sada/desktop); override the artifact name and
+  # executable so Linux packaging doesn't put a "/" in output paths.
+  executableName: sada
+  maintainer: Sada contributors <helghareeb@users.noreply.github.com>
+  artifactName: ${productName}-${version}-${arch}.${ext}
 # No code-signing configured by default — builds are unsigned. See docs/BUILD.md.
