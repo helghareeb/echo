@@ -121,6 +121,10 @@ MIT — see [LICENSE](LICENSE). Sada is an independent, community-driven
 restoration of the free **almufragh** app; huge thanks to its original author.
 Third-party components and their licenses are listed in [NOTICE](NOTICE).
 
+Created and maintained by **[Haitham El-Ghareeb](https://helghareeb.github.io)**
+([GitHub](https://github.com/helghareeb) · [LinkedIn](https://www.linkedin.com/in/helghareeb)).
+Contributions welcome — this is his first public open-source product.
+
 ---
 
 <div dir="rtl">
@@ -184,5 +188,9 @@ pnpm dev:desktop
 
 رخصة MIT — انظر [LICENSE](LICENSE). صدى مشروع مجتمعي مستقل لإحياء تطبيق **المفرغ**
 المجاني، مع خالص الشكر لمؤلفه الأصلي.
+
+طوّره ويتعهّده **[هيثم الغريب](https://helghareeb.github.io)**
+([جيت​هَب](https://github.com/helghareeb) · [لينكدإن](https://www.linkedin.com/in/helghareeb)) —
+وهو أول منتج مفتوح المصدر ينشره للعموم. المساهمات مرحّب بها.
 
 </div>

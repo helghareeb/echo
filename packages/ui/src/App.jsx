@@ -16,6 +16,10 @@ import {
   faStop,
   faMinus,
   faCircleInfo,
+  faGlobe,
+  faLink,
+  faCode,
+  faBug,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { secondsToHHMMSS } from "./util";
@@ -26,6 +30,61 @@ import textToSpeechImg from "./assets/text-to-speech.png";
 import splashImg from "./assets/splash.png";
 
 const WIT_URL = "https://wit.ai";
+
+// Author / brand links — kept in sync with the personal-brand kit (@helghareeb).
+const LINKS = {
+  website: "https://helghareeb.github.io",
+  linkedin: "https://www.linkedin.com/in/helghareeb",
+  youtube: "https://youtube.com/@helghareeb",
+  github: "https://github.com/helghareeb",
+  source: "https://github.com/helghareeb/echo",
+  issues: "https://github.com/helghareeb/echo/issues",
+};
+
+const AboutModal = ({ onClose, appInfo }) => {
+  const link = (icon, label, url) => (
+    <button
+      className="btn btn-ghost btn-sm justify-start rounded-lg"
+      onClick={() => bridge.openLink(url)}
+    >
+      <FontAwesomeIcon icon={icon} fixedWidth className="text-success" />
+      <span className="mx-1">{label}</span>
+    </button>
+  );
+  return (
+    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[60] bg-slate-200 bg-opacity-50">
+      <div className="card bg-base-100 shadow p-8 w-96 text-start">
+        <div className="absolute top-2 right-2">
+          <button className="btn btn-ghost btn-square btn-sm mx-1" onClick={onClose}>
+            <FontAwesomeIcon icon={faClose} fixedWidth size="lg" />
+          </button>
+        </div>
+        <h2 className="font-bold text-lg mb-1">
+          {loc.app_name} · {loc.tagline}
+        </h2>
+        <p className="text-sm mb-4">{loc.about_project}</p>
+
+        <div className="text-sm font-bold">{loc.author}</div>
+        <div className="text-sm">{loc.author_name}</div>
+        <div className="text-xs text-slate-400 mb-3">{loc.author_role}</div>
+
+        <div className="text-sm font-bold mb-1">{loc.contact_connect}</div>
+        <div className="grid grid-cols-2 gap-1">
+          {link(faGlobe, loc.website, LINKS.website)}
+          {link(faLink, loc.linkedin, LINKS.linkedin)}
+          {link(faLink, loc.youtube, LINKS.youtube)}
+          {link(faCode, loc.github_profile, LINKS.github)}
+          {link(faCode, loc.source_code, LINKS.source)}
+          {link(faBug, loc.report_issue, LINKS.issues)}
+        </div>
+
+        <div className="text-xs text-slate-400 mt-4">
+          {loc.license_note} · {loc.version_label} {appInfo?.version || ""}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const FileItem = ({ name, id, duration, deleteFile }) => {
   const shortName = name.length > 14 ? name.substring(0, 12) + "…" : name;
@@ -411,7 +470,7 @@ const ProcessStats = () => {
   );
 };
 
-const TitleBar = ({ closeApp, toggleModal, minimizeApp }) => (
+const TitleBar = ({ closeApp, toggleModal, minimizeApp, openAbout }) => (
   <div className="flex flex-row justify-between items-center fixed top-0 bg-success w-full">
     <div className="flex flex-row justify-start items-center p-2">
       <button className="btn btn-ghost btn-square btn-error btn-sm" onClick={closeApp}>
@@ -422,6 +481,9 @@ const TitleBar = ({ closeApp, toggleModal, minimizeApp }) => (
       </button>
       <button className="btn btn-ghost btn-square btn-sm mx-1" onClick={toggleModal}>
         <FontAwesomeIcon icon={faGear} fixedWidth size="lg" />
+      </button>
+      <button className="btn btn-ghost btn-square btn-sm" onClick={openAbout} title={loc.about}>
+        <FontAwesomeIcon icon={faCircleInfo} fixedWidth size="lg" />
       </button>
     </div>
     <div className="title-bar top-1 text-base-100"> </div>
@@ -488,6 +550,7 @@ const SplashScreen = () => (
 
 const App = () => {
   const [modal, setModal] = useState(false);
+  const [about, setAbout] = useState(false);
   const [appReady, setAppReady] = useState(false);
   const [appInfo, setAppInfo] = useState(null);
   const ctx = useContext(Context);
@@ -563,6 +626,7 @@ const App = () => {
       dir={ctx.interfaceLanguage === "en" ? "ltr" : "rtl"}
     >
       {modal && <SettingsModal toggleModal={() => setModal(!modal)} appInfo={appInfo} />}
+      {about && <AboutModal onClose={() => setAbout(false)} appInfo={appInfo} />}
       {ctx.loading && <LoadingModal />}
       {ctx.error && <MessageModal />}
       <section className="z-0 bg-success" />
@@ -570,6 +634,7 @@ const App = () => {
         closeApp={() => bridge.quit()}
         toggleModal={() => setModal(!modal)}
         minimizeApp={() => bridge.minimize()}
+        openAbout={() => setAbout(true)}
       />
       <div className="mx-5 pt-16">
         <ProcessStats />

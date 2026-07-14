@@ -10,7 +10,11 @@
     "url": "git+https://github.com/helghareeb/echo.git"
   },
   "keywords": ["transcription", "subtitles", "srt", "arabic", "wit.ai", "electron", "speech-to-text"],
-  "author": "Sada contributors",
+  "homepage": "https://helghareeb.github.io",
+  "bugs": {
+    "url": "https://github.com/helghareeb/echo/issues"
+  },
+  "author": "Haitham El-Ghareeb and Sada contributors",
   "engines": {
     "node": ">=18"
   },
