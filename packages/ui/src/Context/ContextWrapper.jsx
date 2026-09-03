@@ -46,6 +46,17 @@ export default function ContextWrapper(props) {
     localStorage.setItem("conversionEngine", JSON.stringify(conversionEngine));
     localStorage.setItem("interfaceLanguage", JSON.stringify(interfaceLanguage));
     loc.setLanguage(interfaceLanguage);
+    // The <html> element ships as lang="ar" dir="rtl". The App's own root div
+    // flips direction when the interface language changes, but the document
+    // element does not follow it, and several things are decided there rather
+    // than by our layout: which side the scrollbar sits on, the direction of
+    // native context menus and spell-check UI, and how the renderer reads text
+    // that escapes our tree. Switching to English used to leave all of those
+    // right-to-left. Keep the document in step with the chosen language.
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = interfaceLanguage;
+      document.documentElement.dir = interfaceLanguage === "en" ? "ltr" : "rtl";
+    }
     localStorage.setItem("outputDirectory", JSON.stringify(outputDirectory));
     localStorage.setItem("apiKey", JSON.stringify(apiKey));
     localStorage.setItem("theme", JSON.stringify(theme));

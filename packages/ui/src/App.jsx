@@ -132,8 +132,10 @@ const FileItem = ({ name, id, duration, mediaError, deleteFile }) => {
   );
 };
 
-const TokenHelpModal = ({ onClose }) => (
-  <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[60] bg-slate-200 bg-opacity-50">
+const TokenHelpModal = ({ onClose, zClass = "z-[60]" }) => (
+  <div
+    className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 ${zClass} bg-slate-200 bg-opacity-50`}
+  >
     <div className="card bg-base-100 shadow p-8 w-96 text-start">
       <div className="absolute top-2 right-2">
         <button className="btn btn-ghost btn-square btn-sm mx-1" onClick={onClose}>
@@ -158,6 +160,81 @@ const TokenHelpModal = ({ onClose }) => (
     </div>
   </div>
 );
+
+/**
+ * First-run guide.
+ *
+ * Sada needs exactly one piece of setup — a free Wit.ai token — and before this
+ * existed nothing said so. The app opened on an empty window; the only mention
+ * of a token was behind the gear icon, and the first time most people learned
+ * they needed one was an error message after they had already added files and
+ * pressed Start. For anyone who does not build software, that reads as "the app
+ * is broken".
+ *
+ * So: say it first, say what it costs (nothing), and take the token right here
+ * rather than sending them off to find Settings. Shown whenever no token has
+ * been saved yet, so postponing it is safe — it comes back next launch.
+ */
+const WelcomeModal = ({ onClose, onOpenHelp }) => {
+  const { setApiKey } = useContext(Context);
+  const [draft, setDraft] = useState("");
+
+  const saveAndClose = () => {
+    const token = draft.trim();
+    if (token) setApiKey(token);
+    onClose();
+  };
+
+  return (
+    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[70] bg-slate-200 bg-opacity-50">
+      <div className="card bg-base-100 shadow-xl p-8 w-[26rem] text-start">
+        <h2 className="font-bold text-xl mb-2">{loc.welcome_title}</h2>
+        <p className="text-sm mb-4">{loc.welcome_intro}</p>
+
+        <ol className="space-y-2 text-sm mb-4">
+          <li>{loc.welcome_step_1}</li>
+          <li>{loc.welcome_step_2}</li>
+          <li>{loc.welcome_step_3}</li>
+        </ol>
+
+        {/* Stacked, not side by side: the two labels are long in both languages
+            and ran off the edge of the card when laid out in a row. */}
+        <div className="flex flex-col items-start gap-1 mb-3">
+          <button className="btn btn-sm btn-success rounded-lg" onClick={() => bridge.openLink(WIT_URL)}>
+            <FontAwesomeIcon icon={faKey} fixedWidth />
+            <span className="mx-1">{loc.welcome_get_token}</span>
+          </button>
+          <button className="btn btn-xs btn-ghost text-info rounded-lg" onClick={onOpenHelp}>
+            <FontAwesomeIcon icon={faCircleInfo} fixedWidth />
+            <span className="mx-1">{loc.how_to_get_token}</span>
+          </button>
+        </div>
+
+        <input
+          type="text"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          placeholder={loc.welcome_paste_here}
+          className="input input-bordered w-full mb-2"
+        />
+        <div className="text-xs text-success mb-4">{loc.welcome_privacy}</div>
+
+        <div className="flex flex-row items-center justify-between">
+          <button className="btn btn-ghost btn-sm rounded-lg" onClick={onClose}>
+            {loc.welcome_skip}
+          </button>
+          <button
+            className="btn btn-sm btn-success rounded-lg"
+            onClick={saveAndClose}
+            disabled={!draft.trim()}
+          >
+            {loc.welcome_save_and_start}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const SettingsModal = ({ toggleModal, appInfo }) => {
   const {
@@ -574,6 +651,8 @@ const SplashScreen = () => (
 const App = () => {
   const [modal, setModal] = useState(false);
   const [about, setAbout] = useState(false);
+  const [welcome, setWelcome] = useState(false);
+  const [welcomeHelp, setWelcomeHelp] = useState(false);
   const [appReady, setAppReady] = useState(false);
   const [appInfo, setAppInfo] = useState(null);
   const ctx = useContext(Context);
@@ -640,6 +719,13 @@ const App = () => {
 
   loc.setLanguage(ctx.interfaceLanguage || "ar");
 
+  // Wait for the splash to clear so the guide is the first thing on screen
+  // rather than something that appears behind it.
+  useEffect(() => {
+    if (appReady && !ctx.apiKey) setWelcome(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appReady]);
+
   if (!appReady) return <SplashScreen />;
 
   return (
@@ -648,6 +734,16 @@ const App = () => {
       data-theme={ctx.theme === "dark" ? "dark" : "light"}
       dir={ctx.interfaceLanguage === "en" ? "ltr" : "rtl"}
     >
+      {welcome && (
+        <WelcomeModal
+          onClose={() => {
+            setWelcome(false);
+            setWelcomeHelp(false);
+          }}
+          onOpenHelp={() => setWelcomeHelp(true)}
+        />
+      )}
+      {welcomeHelp && <TokenHelpModal onClose={() => setWelcomeHelp(false)} zClass="z-[80]" />}
       {modal && <SettingsModal toggleModal={() => setModal(!modal)} appInfo={appInfo} />}
       {about && <AboutModal onClose={() => setAbout(false)} appInfo={appInfo} />}
       {ctx.loading && <LoadingModal />}

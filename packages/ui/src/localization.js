@@ -1,5 +1,8 @@
 import LocalizedStrings from "react-localization";
 
+// Emoji live in these strings rather than in the components, so that both
+// languages get them, a translator can move or drop one per language, and no
+// component has to hard-code a glyph beside a translated label.
 const loc = new LocalizedStrings({
   en: {
     app_name: "Sada",
@@ -22,7 +25,7 @@ const loc = new LocalizedStrings({
     clear: "Clear",
     drag_and_drop_or_click_select_button: "Drag & drop files, or click Add",
     drop_files_here: "Drop files here",
-    supported_formats_hint: "Audio or video — MP3, M4A, Opus, WAV, FLAC, MP4, MKV, WebM and more",
+    supported_formats_hint: "🎵 Audio or video — MP3, M4A, Opus, WAV, FLAC, MP4, MKV, WebM and more",
     start: "Start",
     stop: "Stop",
     files: "Files",
@@ -35,9 +38,9 @@ const loc = new LocalizedStrings({
     upload_to_server: "Transcribe",
     version_label: "Version",
     project_updates: "Project & updates",
-    how_to_get_token: "How to get a free token",
+    how_to_get_token: "How to get a free token 🎁",
     free_note: "Wit.ai is free from Meta — the token is yours and stays on your device.",
-    token_help_title: "Get your free Wit.ai token",
+    token_help_title: "🔑 Get your free Wit.ai token",
     token_step1: "Open wit.ai and sign in with a free Meta account.",
     token_step2: "Create a new App and set its language to Arabic.",
     token_step3: "Open the app's Settings (gear icon).",
@@ -59,6 +62,21 @@ const loc = new LocalizedStrings({
     source_code: "Source code",
     report_issue: "Report an issue",
     license_note: "MIT licensed · free & open source",
+
+    // First run. Shown once, when no token has ever been saved, so the first
+    // thing a new user meets is the one setup step Sada actually needs — instead
+    // of an empty window and an error after their first attempt.
+    welcome_title: "👋 Welcome to Sada",
+    welcome_intro:
+      "Sada turns your audio and video into subtitles. Everything it needs is already inside this app — there is nothing else to install. 🎉",
+    welcome_step_1: "🔑 Get a free Wit.ai token from Meta — about two minutes, no payment.",
+    welcome_step_2: "📋 Paste it in the box below. It is saved on this device only.",
+    welcome_step_3: "🎧 Drag in your audio or video files and press Start.",
+    welcome_get_token: "Get my free token",
+    welcome_paste_here: "Paste your token here",
+    welcome_save_and_start: "Save & start",
+    welcome_skip: "I'll do this later",
+    welcome_privacy: "🔒 Your token and your files never leave your computer.",
   },
   ar: {
     app_name: "صدى",
@@ -81,7 +99,7 @@ const loc = new LocalizedStrings({
     clear: "مسح",
     drag_and_drop_or_click_select_button: "اسحب وأفلت الملفات، أو اضغط إضافة",
     drop_files_here: "أفلت الملفات هنا",
-    supported_formats_hint: "صوت أو فيديو — MP3 وM4A وOpus وWAV وFLAC وMP4 وMKV وWebM وغيرها",
+    supported_formats_hint: "🎵 صوت أو فيديو — MP3 وM4A وOpus وWAV وFLAC وMP4 وMKV وWebM وغيرها",
     start: "ابدأ",
     stop: "إيقاف",
     files: "الملفات",
@@ -94,9 +112,9 @@ const loc = new LocalizedStrings({
     upload_to_server: "التفريغ",
     version_label: "الإصدار",
     project_updates: "المشروع والتحديثات",
-    how_to_get_token: "كيف تحصل على مفتاح مجاني",
+    how_to_get_token: "كيف تحصل على مفتاح مجاني 🎁",
     free_note: "خدمة wit.ai مجانية من Meta — المفتاح ملكك ويبقى على جهازك.",
-    token_help_title: "احصل على مفتاح wit.ai المجاني",
+    token_help_title: "🔑 احصل على مفتاح wit.ai المجاني",
     token_step1: "افتح موقع wit.ai وسجّل الدخول بحساب Meta مجاني.",
     token_step2: "أنشئ تطبيقاً جديداً واضبط لغته على العربية.",
     token_step3: "افتح إعدادات التطبيق (أيقونة الترس).",
@@ -118,6 +136,18 @@ const loc = new LocalizedStrings({
     source_code: "الشيفرة المصدرية",
     report_issue: "الإبلاغ عن مشكلة",
     license_note: "رخصة MIT · مجاني ومفتوح المصدر",
+
+    welcome_title: "👋 أهلاً بك في صدى",
+    welcome_intro:
+      "صدى يحوّل ملفاتك الصوتية والمرئية إلى ترجمة مكتوبة. كل ما يحتاجه موجود داخل التطبيق — ولا شيء آخر عليك تثبيته. 🎉",
+    welcome_step_1: "🔑 احصل على مفتاح wit.ai مجاني من Meta — دقيقتان تقريباً وبلا أي رسوم.",
+    welcome_step_2: "📋 الصقه في الحقل بالأسفل. يُحفظ على هذا الجهاز وحده.",
+    welcome_step_3: "🎧 اسحب ملفاتك الصوتية أو المرئية ثم اضغط «ابدأ».",
+    welcome_get_token: "احصل على مفتاحي المجاني",
+    welcome_paste_here: "الصق المفتاح هنا",
+    welcome_save_and_start: "احفظ وابدأ",
+    welcome_skip: "سأفعل ذلك لاحقاً",
+    welcome_privacy: "🔒 مفتاحك وملفاتك لا تغادر جهازك أبداً.",
   },
 });
 
