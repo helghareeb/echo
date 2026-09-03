@@ -27,5 +27,12 @@
   },
   "devDependencies": {
     "typescript": "^5.4.5"
+  },
+  "pnpm": {
+    "//": "ffmpeg/ffprobe ship as per-OS, per-CPU optional packages resolved at RUNTIME on the user's machine. pnpm installs only the build host's by default, so an arm64 mac runner produced an Intel .dmg holding arm64 binaries that crashed on launch. Install every target's binaries on every runner; apps/desktop/build/afterPack.cjs then deletes the ones each artifact cannot use.",
+    "supportedArchitectures": {
+      "os": ["win32", "darwin", "linux"],
+      "cpu": ["x64", "arm64"]
+    }
   }
 }

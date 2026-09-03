@@ -23,8 +23,14 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+      # Installs every platform's ffmpeg/ffprobe, not just this runner's — see
+      # pnpm.supportedArchitectures in the root package.json. Without it the
+      # arm64 mac runner produced an Intel .dmg carrying arm64 binaries, and the
+      # app died on launch for every Intel Mac user. apps/desktop/build/afterPack.cjs
+      # then keeps only the binary each artifact can use.
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+
       - name: Build desktop installers
         shell: bash
         env:
@@ -48,6 +54,26 @@ jobs:
             export APPLE_TEAM_ID="$SIGN_APPLE_TEAM_ID"
           fi
           pnpm --filter @sada/desktop dist
+
+      # Fedora / openSUSE / RHEL friends. Deliberately a separate, non-fatal step:
+      # the fpm build electron-builder bundles dates from 2016 and fails against
+      # rpm >= 6, so an rpm that cannot be built must never cost everyone else
+      # their .deb and .AppImage. If this step is skipped the release simply has
+      # no .rpm, and docs/INSTALL.md points those users at the AppImage.
+      - name: Build .rpm (best effort)
+        if: runner.os == 'Linux'
+        continue-on-error: true
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y rpm
+          sudo rpmdb --initdb || true
+          pnpm --filter @sada/desktop dist:linux:rpm
+
+      - name: Verify the installers carry the right ffmpeg
+        shell: bash
+        run: node scripts/verify-artifacts.mjs
+
       - name: Attach installers to the release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
@@ -57,7 +83,14 @@ jobs:
             apps/desktop/release/*.dmg
             apps/desktop/release/*.AppImage
             apps/desktop/release/*.deb
+            apps/desktop/release/*.rpm
           fail_on_unmatched_files: false
+          # Bilingual "which file do I download, and what do I do with it"
+          # instructions, kept in the repo so every release page carries them.
+          body_path: .github/RELEASE_BODY.md
+          append_body: true
+          generate_release_notes: true
+
       - name: Upload build artifacts (non-tag runs)
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         uses: actions/upload-artifact@v4
@@ -68,4 +101,5 @@ jobs:
             apps/desktop/release/*.dmg
             apps/desktop/release/*.AppImage
             apps/desktop/release/*.deb
+            apps/desktop/release/*.rpm
           if-no-files-found: ignore
