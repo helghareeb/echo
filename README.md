@@ -62,16 +62,27 @@ rebuilt to run on **Windows, macOS, Linux, and the browser**.
 ### 📥 Download & التحميل
 
 Grab the latest installer for your OS from the
-**[Releases page](https://github.com/helghareeb/echo/releases)**:
+**[Releases page](https://github.com/helghareeb/echo/releases/latest)**:
 
 | OS | File |
 |----|------|
-| Windows | `Sada-Setup-x.y.z.exe` (installer) or `Sada-x.y.z.exe` (portable) |
-| macOS | `Sada-x.y.z.dmg` |
-| Linux | `Sada-x.y.z.AppImage` or `.deb` |
+| 🪟 Windows | `Sada-Setup-x.y.z.exe` (installer) or `Sada-Portable-x.y.z.exe` (no install) |
+| 🍎 macOS — Apple Silicon | `Sada-x.y.z-mac-arm64.dmg` |
+| 🍎 macOS — Intel | `Sada-x.y.z-mac-x64.dmg` |
+| 🐧 Ubuntu / Mint / Debian | `Sada-x.y.z-amd64.deb` |
+| 🐧 Fedora / openSUSE | `Sada-x.y.z-x86_64.rpm` |
+| 🐧 Other Linux | `Sada-x.y.z-x86_64.AppImage` |
 
-> Builds are currently **unsigned**, so Windows SmartScreen / macOS Gatekeeper may
-> warn on first launch. See [docs/BUILD.md](docs/BUILD.md).
+**Nothing else to install.** Every download bundles its own FFmpeg, so the app
+reads your media on its own — no codec packs, no separate downloads.
+
+> 📖 **New to this? Read the step-by-step guide: [docs/INSTALL.md](docs/INSTALL.md)**
+> — it covers each platform, the first-launch security warnings, and getting
+> your free key.
+
+> ⚠️ Builds are **unsigned**, so Windows SmartScreen and macOS Gatekeeper warn on
+> first launch. That is expected and the guide walks through it. Signing
+> certificates cost hundreds of dollars a year; Sada is free.
 
 ### 🛠️ Build from source
 
@@ -168,9 +179,26 @@ Contributions welcome — this is his first public open-source product.
 
 ### 📥 التحميل
 
-نزّل أحدث نسخة لنظامك من **[صفحة الإصدارات](https://github.com/helghareeb/echo/releases)**.
-الإصدارات حالياً **غير موقّعة رقمياً**، لذا قد يظهر تحذير من ويندوز أو macOS عند
-أول تشغيل — راجع [docs/BUILD.md](docs/BUILD.md).
+نزّل أحدث نسخة لنظامك من **[صفحة الإصدارات](https://github.com/helghareeb/echo/releases/latest)**:
+
+| النظام | الملف |
+|----|------|
+| 🪟 ويندوز | `Sada-Setup-x.y.z.exe` (مثبِّت) أو `Sada-Portable-x.y.z.exe` (بلا تثبيت) |
+| 🍎 ماك — Apple Silicon | `Sada-x.y.z-mac-arm64.dmg` |
+| 🍎 ماك — إنتل | `Sada-x.y.z-mac-x64.dmg` |
+| 🐧 أوبونتو / منت / دبيان | `Sada-x.y.z-amd64.deb` |
+| 🐧 فيدورا / أوبن‌سوزي | `Sada-x.y.z-x86_64.rpm` |
+| 🐧 أي لينكس آخر | `Sada-x.y.z-x86_64.AppImage` |
+
+**لا شيء آخر عليك تثبيته.** كل نسخة تحمل معها FFmpeg الخاص بها، فيقرأ التطبيق
+ملفاتك بنفسه — بلا حزم ترميز ولا تنزيلات إضافية.
+
+> 📖 **أول مرة تستخدمه؟ اقرأ الدليل خطوة بخطوة: [docs/INSTALL.ar.md](docs/INSTALL.ar.md)**
+> — يشرح كل نظام، وتحذيرات أول تشغيل، وكيفية الحصول على مفتاحك المجاني.
+
+> ⚠️ الإصدارات **غير موقّعة رقمياً**، لذا سيحذّرك ويندوز أو macOS عند أول تشغيل.
+> هذا متوقّع والدليل يشرح تجاوزه؛ فشهادات التوقيع تكلّف مئات الدولارات سنوياً
+> وصدى مجاني.
 
 ### 🛠️ البناء من المصدر
 
