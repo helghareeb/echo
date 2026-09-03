@@ -18,11 +18,12 @@
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "start": "electron-vite preview",
-    "pack:dir": "electron-vite build && electron-builder --dir",
-    "dist": "electron-vite build && electron-builder --publish never",
-    "dist:win": "electron-vite build && electron-builder --win --publish never",
-    "dist:mac": "electron-vite build && electron-builder --mac --publish never",
-    "dist:linux": "electron-vite build && electron-builder --linux --publish never"
+    "pack:dir": "electron-vite build && node build/dist.cjs --dir",
+    "dist": "electron-vite build && node build/dist.cjs --publish never",
+    "dist:win": "electron-vite build && node build/dist.cjs --win --publish never",
+    "dist:mac": "electron-vite build && node build/dist.cjs --mac --publish never",
+    "dist:linux": "electron-vite build && node build/dist.cjs --linux --publish never",
+    "dist:linux:rpm": "electron-vite build && node build/dist.cjs --linux rpm --publish never"
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",

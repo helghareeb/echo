@@ -12,6 +12,13 @@ files:
 asarUnpack:
   - "**/@ffmpeg-installer/**"
   - "**/@ffprobe-installer/**"
+# Every platform's ffmpeg/ffprobe is installed on every build machine (see
+# pnpm.supportedArchitectures in the root package.json), because the resolver
+# picks its binary from the USER's platform+arch at runtime, not the builder's.
+# This hook keeps the one binary each artifact can actually use, deletes the rest
+# (~140 MB apiece), and fails the build if the right one is missing.
+afterPack: build/afterPack.cjs
+
 win:
   target:
     - target: nsis
@@ -37,21 +44,91 @@ nsis:
   deleteAppDataOnUninstall: false
   # Adds an explicit "Uninstall Sada" Start Menu shortcut (see build/installer.nsh).
   include: build/installer.nsh
+  # Most of the people this is built for read Arabic first. Ship the installer in
+  # both languages and let them pick on the first screen.
+  multiLanguageInstaller: true
+  displayLanguageSelector: true
+  installerLanguages:
+    - ar_SA
+    - en_US
+
 mac:
   target:
     - target: dmg
       arch: [x64, arm64]
   icon: build/icon.png
   category: public.app-category.productivity
+  darkModeSupport: true
+  # Name both disk images after their CPU so nobody downloads the wrong one:
+  # Sada-x.y.z-mac-arm64.dmg (Apple Silicon) / Sada-x.y.z-mac-x64.dmg (Intel).
+  artifactName: ${productName}-${version}-mac-${arch}.${ext}
+  # Builds are unsigned unless a certificate is configured (docs/BUILD.md). Do not
+  # run Gatekeeper assessment against an unsigned bundle: it only fails the build,
+  # it cannot make an unsigned app trusted.
+  gatekeeperAssess: false
+dmg:
+  title: ${productName} ${version}
+  # The default layout already shows the app beside an Applications shortcut,
+  # which is the whole instruction a first-time user needs: drag it across.
+  window:
+    width: 540
+    height: 380
+
 linux:
+  # AppImage + deb are the two artifacts every release is guaranteed to carry.
+  # rpm is built by a separate, best-effort CI step (`dist:linux:rpm`): the fpm
+  # build electron-builder bundles is from 2016 and breaks against rpm >= 6, so
+  # it must never be able to sink the Linux release. See docs/BUILD.md.
   target:
     - AppImage
     - deb
-  icon: build/icon.png
+  # A DIRECTORY of sized PNGs, not a single file. Given one file, electron-builder
+  # cannot work out the icon size and installs it to hicolor/0x0/apps/ — an
+  # invalid path, so the desktop entry finds no icon and the app shows a blank
+  # placeholder in the applications menu. Sizes are generated from build/icon.svg.
+  icon: build/icons
   category: AudioVideo
   # The npm package is scoped (@sada/desktop); override the artifact name and
   # executable so Linux packaging doesn't put a "/" in output paths.
   executableName: sada
   maintainer: Sada contributors <helghareeb@users.noreply.github.com>
+  artifactName: ${productName}-${version}-${arch}.${ext}
+  synopsis: Turn voice into text — حوّل الصوت إلى نص
+  # ONE line, deliberately. electron-builder feeds `description` into the .desktop
+  # file's Comment= key and a Comment spanning several lines makes the whole entry
+  # unparseable, so the launcher silently drops the app. A `Comment:` in the map
+  # below cannot rescue it either — this value wins the collision.
+  description: Sada turns audio and video into Arabic subtitles (.srt) and plain text (.txt). It carries its own FFmpeg, so there is nothing else to install.
+  # electron-builder 24 writes these keys straight into the .desktop file, so this
+  # map must stay FLAT — a nested `entry:` is serialised as `entry=[object Object]`.
+  # Comment must be one line: a multi-line value makes the entry unparseable, which
+  # is what happened when it fell back to `description` above.
+  desktop:
+    Name: Sada
+    Name[ar]: صدى
+    GenericName: Audio transcription
+    GenericName[ar]: تفريغ صوتي
+    # Comment (English) and Categories come from `description` and `category`
+    # above; repeating them here is ignored. The Arabic Comment has no such owner.
+    Comment[ar]: حوّل الصوت إلى نص
+    Keywords: transcription;subtitles;srt;subtitle;audio;speech;arabic;تفريغ;ترجمة;صوت;
+    StartupWMClass: Sada
+deb:
+  # ffmpeg is bundled, so the package needs no media dependencies of its own.
+  # These are the shared libraries Electron itself wants on a minimal desktop.
+  depends:
+    - libgtk-3-0
+    - libnotify4
+    - libnss3
+    - libxss1
+    - libxtst6
+    - xdg-utils
+    - libatspi2.0-0
+    - libuuid1
+    - libsecret-1-0
+appImage:
+  # The AppImage is the fallback for distributions we build no native package
+  # for. docs/INSTALL.md steers people to .deb / .rpm first, because AppImage
+  # needs libfuse2, which recent Ubuntu releases no longer ship by default.
   artifactName: ${productName}-${version}-${arch}.${ext}
 # No code-signing configured by default — builds are unsigned. See docs/BUILD.md.
