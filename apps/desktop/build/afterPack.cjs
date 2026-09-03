@@ -87,6 +87,7 @@ exports.default = async function afterPack(context) {
 
         if (keep.has(entry)) {
           found.add(`${scope}/${entry}`);
+          ensureExecutable(target, electronPlatformName);
           continue;
         }
         freed += directorySize(target);
@@ -117,6 +118,34 @@ exports.default = async function afterPack(context) {
       `removed ${removed} foreign build(s), ${(freed / 1024 / 1024).toFixed(0)} MB`,
   );
 };
+
+/**
+ * Guarantee the binaries we keep are executable.
+ *
+ * `@ffprobe-installer` ships its binary mode 644 and relies on a postinstall
+ * `chmod u+x` to fix it. That is not something a build can depend on: package
+ * managers skip, sandbox or cache around lifecycle scripts, and a restored
+ * store can hand back the file with its original mode. On a GitHub runner the
+ * bit was simply absent, so the packaged app carried an ffprobe it could not
+ * execute — every file the user added would fail to probe its duration and be
+ * flagged unreadable, with the app otherwise looking perfectly healthy.
+ *
+ * It happened to be set on the maintainer's machine, which is precisely why
+ * this needs to be enforced at package time rather than trusted.
+ */
+function ensureExecutable(dir, platform) {
+  if (platform === "win32") return; // .exe needs no permission bit
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isFile()) continue;
+    if (entry.name !== "ffmpeg" && entry.name !== "ffprobe") continue;
+    const file = path.join(dir, entry.name);
+    const { mode } = fs.statSync(file);
+    if ((mode & 0o111) !== 0o111) {
+      fs.chmodSync(file, 0o755);
+      console.log(`  • made executable: ${path.relative(dir, file) || entry.name} in ${dir}`);
+    }
+  }
+}
 
 function directorySize(dir) {
   let total = 0;
