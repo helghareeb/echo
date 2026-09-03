@@ -26,7 +26,7 @@ A community restoration of the discontinued **almufragh (المفرغ)** app.
 
 ### What is Sada?
 
-**Sada** takes your audio files and produces subtitle files (`.srt`) and plain text
+**Sada** takes your audio *or video* files and produces subtitle files (`.srt`) and plain text
 (`.txt`). It splits audio into short clips with **ffmpeg**, sends each clip to
 **Meta's Wit.ai** speech service, and stitches the word-level timings back into
 clean, time-coded subtitles. It is tuned for **Arabic** speech.
@@ -40,7 +40,9 @@ rebuilt to run on **Windows, macOS, Linux, and the browser**.
 
 ### ✨ Features
 
-- 🎧 Transcribe `.mp3`, `.wav`, `.ogg`, `.m4a`, `.flac` to `.srt` + `.txt`
+- 🎧 Transcribe practically any audio **or video** file to `.srt` + `.txt` — MP3, M4A,
+  Opus, WAV, FLAC, WMA, MP4, MKV, WebM, AVI and more. Sada carries its own FFmpeg
+  and identifies files by content, not extension ([details](docs/FORMATS.md))
 - 🕒 Accurate word-level timings stitched across clips
 - 🌍 Cross-platform: desktop (Windows/macOS/Linux) and web
 - 🗣️ Bilingual interface: **Arabic (RTL)** and **English**
@@ -146,7 +148,8 @@ Contributions welcome — this is his first public open-source product.
 
 ### ✨ المزايا
 
-- 🎧 تفريغ ملفات `.mp3` و`.wav` و`.ogg` و`.m4a` و`.flac` إلى `.srt` و`.txt`
+- 🎧 تفريغ أي ملف صوتي **أو مرئي** تقريبًا إلى `.srt` و`.txt` — MP3 وM4A وOpus وWAV
+  وFLAC وWMA وMP4 وMKV وWebM وAVI وغيرها ([التفاصيل](docs/FORMATS.md))
 - 🕒 توقيتات دقيقة على مستوى الكلمة عبر المقاطع
 - 🌍 متعدد المنصات: سطح المكتب (ويندوز/macOS/لينكس) والويب
 - 🗣️ واجهة بلغتين: **العربية (من اليمين لليسار)** و**الإنجليزية**

@@ -20,6 +20,7 @@ import {
   faLink,
   faCode,
   faBug,
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { secondsToHHMMSS } from "./util";
@@ -86,24 +87,36 @@ const AboutModal = ({ onClose, appInfo }) => {
   );
 };
 
-const FileItem = ({ name, id, duration, deleteFile }) => {
+const FileItem = ({ name, id, duration, mediaError, deleteFile }) => {
   const shortName = name.length > 14 ? name.substring(0, 12) + "…" : name;
   const numberOfClips = Math.max(1, Math.round(duration / 18));
+  // A file whose duration could not be read is shown flagged rather than hidden
+  // or silently dropped: the user chose it, so they get to see why it will not
+  // work and can remove it or fetch a better copy before starting a long run.
   return (
     <div className="card bg-base-100 p-2 my-1 rounded-none border-b-2">
       <div className="flex flex-row justify-between items-center">
         <div className="text-ellipsis">
-          <FontAwesomeIcon icon={faFile} fixedWidth size="lg" className="text-neutral" />
+          <FontAwesomeIcon
+            icon={mediaError ? faTriangleExclamation : faFile}
+            fixedWidth
+            size="lg"
+            className={mediaError ? "text-error" : "text-neutral"}
+          />
           {shortName}
         </div>
         <div className="flex flex-row items-center">
-          <span className="badge badge-success mx-2 p-3">{numberOfClips}</span>
-          <span className="badge badge-success-content mx-2 p-3">
-            <div className="text-white">
-              <FontAwesomeIcon icon={faClock} fixedWidth size="lg" />
-              {secondsToHHMMSS(duration)}
-            </div>
-          </span>
+          {!mediaError && (
+            <>
+              <span className="badge badge-success mx-2 p-3">{numberOfClips}</span>
+              <span className="badge badge-success-content mx-2 p-3">
+                <div className="text-white">
+                  <FontAwesomeIcon icon={faClock} fixedWidth size="lg" />
+                  {secondsToHHMMSS(duration)}
+                </div>
+              </span>
+            </>
+          )}
           <button
             className="btn btn-square btn-outline btn-sm btn-error rounded-lg"
             onClick={() => deleteFile(id)}
@@ -112,6 +125,9 @@ const FileItem = ({ name, id, duration, deleteFile }) => {
           </button>
         </div>
       </div>
+      {mediaError && (
+        <div className="text-xs text-error mt-1 break-words">{mediaError}</div>
+      )}
     </div>
   );
 };
@@ -340,10 +356,15 @@ function MyDropzone() {
     handleNewFiles(files);
   };
 
+  // Deliberately no `accept`: react-dropzone would silently swallow anything
+  // outside the list, and an extension is not evidence about a file's contents.
+  // FFmpeg probes the bytes and is the only thing entitled to reject an input,
+  // which it does with a message naming the file. The old five-extension list
+  // rejected .opus, .webm, .mp4 and every video container that the bundled
+  // FFmpeg had always been able to read.
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     noClick: true,
-    accept: { "audio/*": [".mp3", ".wav", ".ogg", ".m4a", ".flac"] },
   });
 
   const openOutputDir = () => bridge.openOutputDir(outputDirectory);
@@ -379,6 +400,7 @@ function MyDropzone() {
                 id={file.path}
                 name={file.name}
                 duration={file.duration}
+                mediaError={file.mediaError}
                 deleteFile={deleteFile}
               />
             ))}
@@ -392,6 +414,7 @@ function MyDropzone() {
           ) : (
             <div>
               <p>{loc.drag_and_drop_or_click_select_button}</p>
+              <p className="text-xs opacity-60 mt-1">{loc.supported_formats_hint}</p>
               <div className="flex flex-row items-center justify-center mt-2">
                 <button className="btn btn-success btn-sm rounded-lg" onClick={pickFiles}>
                   <FontAwesomeIcon icon={faAdd} fixedWidth size="lg" />
