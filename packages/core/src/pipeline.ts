@@ -3,6 +3,7 @@ import { planClips } from "./planClips";
 import { fixTiming } from "./fixTiming";
 import { filterText, formatSrtBlock, groupTokens } from "./subtitles";
 import { createRateLimiter } from "./rateLimiter";
+import { UnreadableMediaError } from "./errors";
 import type { Ports } from "./ports";
 import type { AudioInput, WitResponse } from "./types";
 
@@ -47,8 +48,24 @@ export function createPipeline(ports: Ports): Pipeline {
 
     // Step 0: split the source into clips.
     emit("step", 0);
-    const durationSec = await duration.getDurationSeconds(input.source);
+    let durationSec: number;
+    try {
+      durationSec = await duration.getDurationSeconds(input.source);
+    } catch (err) {
+      // Ports only know the opaque source (a filesystem path on desktop), so
+      // re-raise against the name the user actually sees in the file list.
+      if (!(err instanceof UnreadableMediaError)) throw err;
+      throw new UnreadableMediaError(fileName, {
+        hasNoAudioTrack: err.hasNoAudioTrack,
+        cause: err.cause,
+      });
+    }
     const plan = planClips(durationSec);
+    // A zero-length plan means FFmpeg gave us no usable audio timeline — an
+    // unreadable file, or a video-only stream. Previously this fell through and
+    // wrote an empty subtitle file, which looks like a transcription failure
+    // rather than a bad input.
+    if (plan.length === 0) throw new UnreadableMediaError(fileName);
     const clips = await chunker.chunk(input.source, plan, () => emit("clipCreated"));
     if (stopped) return;
 
@@ -89,14 +106,37 @@ export function createPipeline(ports: Ports): Pipeline {
   return {
     async run(inputs: AudioInput[]) {
       stopped = false;
+      // Files FFmpeg could not read. Collected rather than thrown so that one
+      // bad download does not cancel the rest of a long queue; reported
+      // together at the end so the user gets one message, not one per file.
+      const skipped: string[] = [];
       try {
         let index = 0;
         for (const input of inputs) {
           if (stopped) break;
-          await processFile(input, index);
+          try {
+            await processFile(input, index);
+          } catch (err) {
+            if (!(err instanceof UnreadableMediaError)) throw err;
+            skipped.push(err.message);
+            emit("fileComplete", index);
+          }
           index += 1;
         }
-        if (!stopped) emit("error", "All files finished. Subtitles saved to the output folder.");
+        if (!stopped) {
+          const done = inputs.length - skipped.length;
+          emit(
+            "error",
+            skipped.length
+              ? [
+                  `Finished ${done} of ${inputs.length} file(s). Subtitles saved to the output folder.`,
+                  "",
+                  `Skipped ${skipped.length}:`,
+                  ...skipped.map((m) => `\u2022 ${m}`),
+                ].join("\n")
+              : "All files finished. Subtitles saved to the output folder.",
+          );
+        }
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
         emit("error", msg || "Error");

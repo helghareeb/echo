@@ -1,4 +1,6 @@
 export * from "./constants";
+export * from "./formats";
+export { UnreadableMediaError } from "./errors";
 export * from "./types";
 export * from "./ports";
 export { planClips } from "./planClips";

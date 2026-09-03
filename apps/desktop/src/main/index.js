@@ -1,8 +1,8 @@
 import path from "path";
 import fs from "fs";
 import { app, BrowserWindow, ipcMain, dialog, shell } from "electron";
-import { createPipeline } from "@sada/core";
-import { createDesktopPorts, cleanTmp } from "./ports";
+import { createPipeline, ELECTRON_FILE_FILTERS } from "@sada/core";
+import { createDesktopPorts, cleanTmp, getDurationSeconds } from "./ports";
 
 const isDev = !app.isPackaged;
 
@@ -79,10 +79,14 @@ ipcMain.on("shell:openOutputDir", (_e, dir) => {
 // ---- IPC: file selection --------------------------------------------------
 ipcMain.handle("dialog:pickFiles", async () => {
   const result = await dialog.showOpenDialog(win, {
-    title: "Select audio files",
+    title: "Select audio or video files",
     buttonLabel: "Select",
     properties: ["openFile", "multiSelections"],
-    filters: [{ name: "Audio", extensions: ["mp3", "wav", "ogg", "m4a", "flac"] }],
+    // ELECTRON_FILE_FILTERS ends with "All Files": the extension lists are a
+    // convenience for the common case, never a gate. FFmpeg decides what is
+    // readable by probing content, so a correctly-encoded file under an odd
+    // name must stay selectable.
+    filters: ELECTRON_FILE_FILTERS,
   });
   if (result.canceled) return [];
   return result.filePaths.map((p) => ({ name: path.basename(p), path: p }));
@@ -103,12 +107,17 @@ ipcMain.handle("audio:getDurations", async (_e, files) => {
   const out = [];
   for (const f of files) {
     let duration = 0;
+    let mediaError = "";
     try {
-      duration = await ports.duration.getDurationSeconds(f.path);
+      duration = await getDurationSeconds(f.path, f.name);
     } catch (err) {
+      // Keep the file in the list but carry the reason, so the row can say
+      // "no audio track" up front instead of the user discovering it after a
+      // long run that produced an empty .srt.
       logError(err);
+      mediaError = err?.message || "Unreadable file";
     }
-    out.push({ ...f, duration });
+    out.push({ ...f, duration, mediaError });
   }
   return out;
 });

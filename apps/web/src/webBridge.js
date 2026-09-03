@@ -1,4 +1,4 @@
-import { createPipeline } from "@sada/core";
+import { createPipeline, WEB_INPUT_ACCEPT } from "@sada/core";
 import { createWebPorts } from "./ports.web";
 import { audioDuration } from "./media";
 
@@ -33,7 +33,9 @@ export const webBridge = {
       const input = document.createElement("input");
       input.type = "file";
       input.multiple = true;
-      input.accept = "audio/*,.mp3,.wav,.ogg,.m4a,.flac";
+      // audio/* + video/* plus explicit extensions, because Windows in
+      // particular reports no MIME type for .opus/.mkv and would grey them out.
+      input.accept = WEB_INPUT_ACCEPT;
       input.onchange = () =>
         resolve(Array.from(input.files || []).map((f) => ({ name: f.name, path: register(f) })));
       input.click();
@@ -48,7 +50,17 @@ export const webBridge = {
     const out = [];
     for (const f of files) {
       const file = registry.get(f.path);
-      out.push({ ...f, duration: file ? await audioDuration(file) : 0 });
+      if (!file) {
+        out.push({ ...f, duration: 0, mediaError: "" });
+        continue;
+      }
+      // Only the cheap <audio> probe runs here: the ffmpeg.wasm fallback has to
+      // load a multi-megabyte wasm core and read the whole file into its
+      // virtual FS, which is too slow to do while the user is still adding
+      // files. A 0 shown in the list is refined at run time, where the port
+      // does the full probe and reports a real reason if it fails.
+      const duration = await audioDuration(file);
+      out.push({ ...f, duration, mediaError: "" });
     }
     return out;
   },
