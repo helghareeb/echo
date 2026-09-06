@@ -8,10 +8,10 @@
     "email": "helghareeb@users.noreply.github.com",
     "url": "https://helghareeb.github.io"
   },
-  "homepage": "https://helghareeb.github.io",
+  "homepage": "https://github.com/helghareeb/sada",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/helghareeb/echo.git"
+    "url": "git+https://github.com/helghareeb/sada.git"
   },
   "main": "out/main/index.js",
   "scripts": {

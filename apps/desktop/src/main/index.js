@@ -16,7 +16,7 @@ for (const dir of [defaultOutputDir, tmpDir, logsDir]) {
 }
 
 /** Repointed from the original Telegram link to the open-source project. */
-const PROJECT_URL = "https://github.com/helghareeb/echo";
+const PROJECT_URL = "https://github.com/helghareeb/sada";
 
 let win;
 let pipeline = null;

@@ -12,7 +12,7 @@ import { audioDuration } from "./media";
  */
 
 const PROXY_URL = import.meta.env?.VITE_WIT_PROXY_URL || "/api/speech";
-const PROJECT_URL = "https://github.com/helghareeb/echo";
+const PROJECT_URL = "https://github.com/helghareeb/sada";
 
 const registry = new Map();
 let counter = 0;

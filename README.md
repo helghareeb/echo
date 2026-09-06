@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="apps/desktop/build/icons/128x128.png" alt="Sada" width="112" height="112" />
+
 # Sada · صدى
 
 **Turn voice into text — حوّل الصوت إلى نص**
@@ -7,16 +9,21 @@
 Free, open-source, cross-platform audio-to-subtitle transcription, tuned for Arabic.
 A community restoration of the discontinued **almufragh (المفرغ)** app.
 
-[![CI](https://github.com/helghareeb/echo/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/helghareeb/echo/actions/workflows/ci.yml)
-[![Latest release](https://img.shields.io/github/v/release/helghareeb/echo?sort=semver&color=success)](https://github.com/helghareeb/echo/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/helghareeb/echo/total?color=4c9)](https://github.com/helghareeb/echo/releases)
-[![License: MIT](https://img.shields.io/github/license/helghareeb/echo?color=yellow)](LICENSE)
-[![Platforms](https://img.shields.io/badge/platform-Windows%20|%20macOS%20|%20Linux%20|%20Web-4c9)](https://github.com/helghareeb/echo/releases/latest)
+[![CI](https://github.com/helghareeb/sada/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/helghareeb/sada/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/helghareeb/sada?sort=semver&color=success)](https://github.com/helghareeb/sada/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/helghareeb/sada/total?color=4c9)](https://github.com/helghareeb/sada/releases)
+[![License: MIT](https://img.shields.io/github/license/helghareeb/sada?color=yellow)](LICENSE)
+[![Platforms](https://img.shields.io/badge/platform-Windows%20|%20macOS%20|%20Linux%20|%20Web-4c9)](https://github.com/helghareeb/sada/releases/latest)
 [![Electron](https://img.shields.io/badge/Electron-2C2E3B?logo=electron&logoColor=9FEAF9)](https://www.electronjs.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Speech: Wit.ai](https://img.shields.io/badge/speech-Wit.ai%20free-00B0FF)](https://wit.ai)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+### [⬇️ Download Sada · حمِّل صدى](https://github.com/helghareeb/sada/releases/latest)
+
+Windows · macOS · Linux — free, no account, nothing else to install.
+ويندوز · ماك · لينكس — مجاني، بلا حساب، ولا شيء آخر تثبّته.
 
 </div>
 
@@ -62,7 +69,7 @@ rebuilt to run on **Windows, macOS, Linux, and the browser**.
 ### 📥 Download & التحميل
 
 Grab the latest installer for your OS from the
-**[Releases page](https://github.com/helghareeb/echo/releases/latest)**:
+**[Releases page](https://github.com/helghareeb/sada/releases/latest)**:
 
 | OS | File |
 |----|------|
@@ -88,8 +95,8 @@ reads your media on its own — no codec packs, no separate downloads.
 
 ```bash
 # prerequisites: Node.js >= 18 and pnpm (npm i -g pnpm)
-git clone https://github.com/helghareeb/echo.git
-cd echo
+git clone https://github.com/helghareeb/sada.git
+cd sada
 pnpm install
 pnpm build            # build the shared core
 
@@ -179,7 +186,7 @@ Contributions welcome — this is his first public open-source product.
 
 ### 📥 التحميل
 
-نزّل أحدث نسخة لنظامك من **[صفحة الإصدارات](https://github.com/helghareeb/echo/releases/latest)**:
+نزّل أحدث نسخة لنظامك من **[صفحة الإصدارات](https://github.com/helghareeb/sada/releases/latest)**:
 
 | النظام | الملف |
 |----|------|
@@ -204,8 +211,8 @@ Contributions welcome — this is his first public open-source product.
 
 ```bash
 # المتطلبات: Node.js 18+ و pnpm
-git clone https://github.com/helghareeb/echo.git
-cd echo
+git clone https://github.com/helghareeb/sada.git
+cd sada
 pnpm install
 pnpm build
 pnpm dev:desktop
