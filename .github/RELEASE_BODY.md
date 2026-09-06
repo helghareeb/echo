@@ -1,5 +1,3 @@
----
-
 ## 📥 Which file do I download? · أيّ ملف أنزّل؟
 
 | Your computer · جهازك | Download · نزّل |
@@ -19,8 +17,8 @@ else to install. Just the app, and a free Wit.ai key on first run. 🔑
 
 ### 📖 Step-by-step guide · دليل خطوة بخطوة
 
-**[English](https://github.com/helghareeb/echo/blob/main/docs/INSTALL.md)** ·
-**[بالعربية](https://github.com/helghareeb/echo/blob/main/docs/INSTALL.ar.md)**
+**[English](https://github.com/helghareeb/sada/blob/main/docs/INSTALL.md)** ·
+**[بالعربية](https://github.com/helghareeb/sada/blob/main/docs/INSTALL.ar.md)**
 
 > ⚠️ **Expect a warning on first launch.** These builds are not code-signed —
 > signing certificates cost hundreds of dollars a year and Sada is free. On

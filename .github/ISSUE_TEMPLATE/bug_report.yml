@@ -1,0 +1,50 @@
+name: 🐞 Problem with Sada · مشكلة في صدى
+description: Something did not work — write in Arabic or English · اكتب بالعربية أو الإنجليزية
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Sada. Answer in **Arabic or English** — both are fine.
+        شكراً لمساعدتك في تحسين صدى. أجب **بالعربية أو الإنجليزية** — كلاهما مقبول.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened? · ماذا حدث؟
+      description: What did you do, and what did Sada do instead? · ماذا فعلت، وماذا فعل صدى بدلاً من المتوقع؟
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Your system · نظامك
+      options:
+        - Windows
+        - macOS (Apple M1/M2/M3/M4)
+        - macOS (Intel)
+        - Linux
+        - Web browser · متصفح الويب
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Sada version · إصدار صدى
+      description: Shown in Settings · مذكور في الإعدادات
+      placeholder: "1.1.0"
+
+  - type: input
+    id: file
+    attributes:
+      label: The media file · الملف
+      description: Format and rough length — e.g. "MP3, 40 minutes" · الصيغة والمدة تقريباً
+      placeholder: "MP3, 40 minutes"
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else? · أي شيء آخر؟
+      description: Error messages or screenshots help a lot · رسائل الخطأ أو صور الشاشة تساعد كثيراً

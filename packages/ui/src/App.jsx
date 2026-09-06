@@ -38,8 +38,8 @@ const LINKS = {
   linkedin: "https://www.linkedin.com/in/helghareeb",
   youtube: "https://youtube.com/@helghareeb",
   github: "https://github.com/helghareeb",
-  source: "https://github.com/helghareeb/echo",
-  issues: "https://github.com/helghareeb/echo/issues",
+  source: "https://github.com/helghareeb/sada",
+  issues: "https://github.com/helghareeb/sada/issues",
 };
 
 const AboutModal = ({ onClose, appInfo }) => {

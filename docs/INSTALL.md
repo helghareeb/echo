@@ -13,7 +13,7 @@ engine that reads your files. There is no second thing to install, ever.
 
 ## 1️⃣ Pick your file
 
-All downloads live on the **[Releases page](https://github.com/helghareeb/echo/releases/latest)**.
+All downloads live on the **[Releases page](https://github.com/helghareeb/sada/releases/latest)**.
 Take one file:
 
 | Your computer | Download this | Size |
@@ -163,7 +163,7 @@ convert anything first. ([full details](FORMATS.md))
 | It's slow | Normal. Transcription runs in real time-ish and is paced to stay inside Wit.ai's free limits. A one-hour recording takes a while — leave it running. |
 
 Still stuck? Open an issue at
-**[github.com/helghareeb/echo/issues](https://github.com/helghareeb/echo/issues)** —
+**[github.com/helghareeb/sada/issues](https://github.com/helghareeb/sada/issues)** —
 in Arabic or English, both are welcome. 🤝
 
 ---

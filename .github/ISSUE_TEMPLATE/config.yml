@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📖 Install guide (English)
+    url: https://github.com/helghareeb/sada/blob/main/docs/INSTALL.md
+    about: First launch warnings, getting your free Wit.ai key, every platform.
+  - name: 📖 دليل التثبيت (بالعربية)
+    url: https://github.com/helghareeb/sada/blob/main/docs/INSTALL.ar.md
+    about: تحذيرات أول تشغيل، والحصول على مفتاح Wit.ai المجاني، وكل نظام.
+  - name: 🎧 Supported formats · الصيغ المدعومة
+    url: https://github.com/helghareeb/sada/blob/main/docs/FORMATS.md
+    about: Which audio and video files Sada can read.

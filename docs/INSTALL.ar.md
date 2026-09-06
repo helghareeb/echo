@@ -18,7 +18,7 @@
 
 ## 1️⃣ اختر ملفك
 
-كل النسخ موجودة في **[صفحة الإصدارات](https://github.com/helghareeb/echo/releases/latest)**.
+كل النسخ موجودة في **[صفحة الإصدارات](https://github.com/helghareeb/sada/releases/latest)**.
 نزّل ملفاً واحداً فقط:
 
 | جهازك | نزّل هذا | الحجم |
@@ -182,7 +182,7 @@ AppImage فيكفي حذف الملف.
 | التفريغ بطيء | هذا طبيعي. يجري التفريغ بوتيرة منضبطة كي يبقى ضمن الحدود المجانية لـ Wit.ai، فتسجيل ساعة يأخذ وقتاً — اتركه يعمل. |
 
 ما زالت المشكلة قائمة؟ افتح بلاغاً على
-**[github.com/helghareeb/echo/issues](https://github.com/helghareeb/echo/issues)** —
+**[github.com/helghareeb/sada/issues](https://github.com/helghareeb/sada/issues)** —
 بالعربية أو بالإنجليزية، وكلاهما مرحّب به. 🤝
 
 </div>
