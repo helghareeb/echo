@@ -1,5 +1,3 @@
----
-
 ## 📥 Which file do I download? · أيّ ملف أنزّل؟
 
 | Your computer · جهازك | Download · نزّل |
