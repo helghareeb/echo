@@ -2,12 +2,15 @@
 
 <img src="apps/desktop/build/icons/128x128.png" alt="Sada" width="112" height="112" />
 
-# Sada · صدى
+# صدى · Sada
 
-**Turn voice into text — حوّل الصوت إلى نص**
+**حوّل الصوت إلى نص — Turn voice into text**
+
+تفريغ صوتي مجاني ومفتوح المصدر إلى ملفات ترجمة، مضبوط للعربية، ويعمل على كل الأنظمة.
+إحياء مجتمعي لتطبيق **المفرِّغ** الذي توقّف.
 
 Free, open-source, cross-platform audio-to-subtitle transcription, tuned for Arabic.
-A community restoration of the discontinued **almufragh (المفرغ)** app.
+A community restoration of the discontinued **almufragh (المفرِّغ)** app.
 
 [![CI](https://github.com/helghareeb/sada/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/helghareeb/sada/actions/workflows/ci.yml)
 [![Latest release](https://img.shields.io/github/v/release/helghareeb/sada?sort=semver&color=success)](https://github.com/helghareeb/sada/releases/latest)
@@ -20,14 +23,108 @@ A community restoration of the discontinued **almufragh (المفرغ)** app.
 [![Speech: Wit.ai](https://img.shields.io/badge/speech-Wit.ai%20free-00B0FF)](https://wit.ai)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-### [⬇️ Download Sada · حمِّل صدى](https://github.com/helghareeb/sada/releases/latest)
+### [⬇️ حمِّل صدى · Download Sada](https://github.com/helghareeb/sada/releases/latest)
 
-Windows · macOS · Linux — free, no account, nothing else to install.
 ويندوز · ماك · لينكس — مجاني، بلا حساب، ولا شيء آخر تثبّته.
+Windows · macOS · Linux — free, no account, nothing else to install.
+
+**[العربية](#arabic)** · **[English](#english-1)**
 
 </div>
 
 ---
+
+<a id="arabic"></a>
+
+<div dir="rtl">
+
+## العربية
+
+### ما هو صدى؟
+
+**صدى** يحوّل ملفاتك الصوتية إلى ملفات ترجمة (`.srt`) ونص عادي (`.txt`). يقوم
+بتقسيم الصوت إلى مقاطع قصيرة باستخدام **ffmpeg**، ثم يرسل كل مقطع إلى خدمة
+التعرّف على الكلام **Wit.ai من Meta**، ويعيد تجميع توقيتات الكلمات في ترجمة
+دقيقة ومؤقّتة. وهو مضبوط للكلام **العربي**.
+
+صدى هو إحياء مفتوح المصدر لتطبيق **المفرغ** الذي كان يعمل على ويندوز فقط، وأُعيد
+بناؤه ليعمل على **ويندوز وmacOS ولينكس والمتصفح**.
+
+> **الخدمة مجانية.** مفاتيح Wit.ai مجانية من Meta — لا يوجد اشتراك مدفوع. تنشئ
+> مفتاحك الخاص خلال دقيقتين (انظر بالأسفل) ولا يغادر جهازك.
+
+### ✨ المزايا
+
+- 🎧 تفريغ أي ملف صوتي **أو مرئي** تقريبًا إلى `.srt` و`.txt` — MP3 وM4A وOpus وWAV
+  وFLAC وWMA وMP4 وMKV وWebM وAVI وغيرها ([التفاصيل](docs/FORMATS.md))
+- 🕒 توقيتات دقيقة على مستوى الكلمة عبر المقاطع
+- 🌍 متعدد المنصات: سطح المكتب (ويندوز/macOS/لينكس) والويب
+- 🗣️ واجهة بلغتين: **العربية (من اليمين لليسار)** و**الإنجليزية**
+- 🌗 سمة فاتحة/داكنة
+- 🔒 الخصوصية: مفتاحك وملفاتك تبقى على جهازك (سطح المكتب)
+- 🆓 مجاني ومفتوح المصدر بالكامل (رخصة MIT)
+
+### 🔑 احصل على مفتاح Wit.ai المجاني
+
+1. افتح **[wit.ai](https://wit.ai)** وسجّل الدخول بحساب Meta مجاني.
+2. أنشئ **تطبيقاً** جديداً واضبط لغته على **العربية**.
+3. افتح **إعدادات** التطبيق (أيقونة الترس).
+4. انسخ **مفتاح الوصول للخادم** (Server Access Token) وليس مفتاح العميل.
+5. في صدى، افتح **الإعدادات ← مفتاح Wit.ai** والصقه. يُحفظ على جهازك فقط، ويقوم
+   صدى بتنظيم الطلبات ليبقى ضمن الحد المجاني.
+
+### 📥 التحميل
+
+نزّل أحدث نسخة لنظامك من **[صفحة الإصدارات](https://github.com/helghareeb/sada/releases/latest)**:
+
+| النظام | الملف |
+|----|------|
+| 🪟 ويندوز | `Sada-Setup-x.y.z.exe` (مثبِّت) أو `Sada-Portable-x.y.z.exe` (بلا تثبيت) |
+| 🍎 ماك — Apple Silicon | `Sada-x.y.z-mac-arm64.dmg` |
+| 🍎 ماك — إنتل | `Sada-x.y.z-mac-x64.dmg` |
+| 🐧 أوبونتو / منت / دبيان | `Sada-x.y.z-amd64.deb` |
+| 🐧 فيدورا / أوبن‌سوزي | `Sada-x.y.z-x86_64.rpm` |
+| 🐧 أي لينكس آخر | `Sada-x.y.z-x86_64.AppImage` |
+
+**لا شيء آخر عليك تثبيته.** كل نسخة تحمل معها FFmpeg الخاص بها، فيقرأ التطبيق
+ملفاتك بنفسه — بلا حزم ترميز ولا تنزيلات إضافية.
+
+> 📖 **أول مرة تستخدمه؟ اقرأ الدليل خطوة بخطوة: [docs/INSTALL.ar.md](docs/INSTALL.ar.md)**
+> — يشرح كل نظام، وتحذيرات أول تشغيل، وكيفية الحصول على مفتاحك المجاني.
+
+> ⚠️ الإصدارات **غير موقّعة رقمياً**، لذا سيحذّرك ويندوز أو macOS عند أول تشغيل.
+> هذا متوقّع والدليل يشرح تجاوزه؛ فشهادات التوقيع تكلّف مئات الدولارات سنوياً
+> وصدى مجاني.
+
+### 🛠️ البناء من المصدر
+
+```bash
+# المتطلبات: Node.js 18+ و pnpm
+git clone https://github.com/helghareeb/sada.git
+cd sada
+pnpm install
+pnpm build
+pnpm dev:desktop
+```
+
+### 🤝 المساهمة
+
+نرحّب بمساهماتكم — انظر [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### 📜 الرخصة والشكر
+
+رخصة MIT — انظر [LICENSE](LICENSE). صدى مشروع مجتمعي مستقل لإحياء تطبيق **المفرغ**
+المجاني، مع خالص الشكر لمؤلفه الأصلي.
+
+طوّره ويتعهّده **[هيثم الغريب](https://helghareeb.github.io)**
+([جيت​هَب](https://github.com/helghareeb) · [لينكدإن](https://www.linkedin.com/in/helghareeb)) —
+وهو أول منتج مفتوح المصدر ينشره للعموم. المساهمات مرحّب بها.
+
+</div>
+
+---
+
+<a id="english-1"></a>
 
 ## English
 
@@ -145,90 +242,3 @@ Created and maintained by **[Haitham El-Ghareeb](https://helghareeb.github.io)**
 ([GitHub](https://github.com/helghareeb) · [LinkedIn](https://www.linkedin.com/in/helghareeb)).
 Contributions welcome — this is his first public open-source product.
 
----
-
-<div dir="rtl">
-
-## العربية
-
-### ما هو صدى؟
-
-**صدى** يحوّل ملفاتك الصوتية إلى ملفات ترجمة (`.srt`) ونص عادي (`.txt`). يقوم
-بتقسيم الصوت إلى مقاطع قصيرة باستخدام **ffmpeg**، ثم يرسل كل مقطع إلى خدمة
-التعرّف على الكلام **Wit.ai من Meta**، ويعيد تجميع توقيتات الكلمات في ترجمة
-دقيقة ومؤقّتة. وهو مضبوط للكلام **العربي**.
-
-صدى هو إحياء مفتوح المصدر لتطبيق **المفرغ** الذي كان يعمل على ويندوز فقط، وأُعيد
-بناؤه ليعمل على **ويندوز وmacOS ولينكس والمتصفح**.
-
-> **الخدمة مجانية.** مفاتيح Wit.ai مجانية من Meta — لا يوجد اشتراك مدفوع. تنشئ
-> مفتاحك الخاص خلال دقيقتين (انظر بالأسفل) ولا يغادر جهازك.
-
-### ✨ المزايا
-
-- 🎧 تفريغ أي ملف صوتي **أو مرئي** تقريبًا إلى `.srt` و`.txt` — MP3 وM4A وOpus وWAV
-  وFLAC وWMA وMP4 وMKV وWebM وAVI وغيرها ([التفاصيل](docs/FORMATS.md))
-- 🕒 توقيتات دقيقة على مستوى الكلمة عبر المقاطع
-- 🌍 متعدد المنصات: سطح المكتب (ويندوز/macOS/لينكس) والويب
-- 🗣️ واجهة بلغتين: **العربية (من اليمين لليسار)** و**الإنجليزية**
-- 🌗 سمة فاتحة/داكنة
-- 🔒 الخصوصية: مفتاحك وملفاتك تبقى على جهازك (سطح المكتب)
-- 🆓 مجاني ومفتوح المصدر بالكامل (رخصة MIT)
-
-### 🔑 احصل على مفتاح Wit.ai المجاني
-
-1. افتح **[wit.ai](https://wit.ai)** وسجّل الدخول بحساب Meta مجاني.
-2. أنشئ **تطبيقاً** جديداً واضبط لغته على **العربية**.
-3. افتح **إعدادات** التطبيق (أيقونة الترس).
-4. انسخ **مفتاح الوصول للخادم** (Server Access Token) وليس مفتاح العميل.
-5. في صدى، افتح **الإعدادات ← مفتاح Wit.ai** والصقه. يُحفظ على جهازك فقط، ويقوم
-   صدى بتنظيم الطلبات ليبقى ضمن الحد المجاني.
-
-### 📥 التحميل
-
-نزّل أحدث نسخة لنظامك من **[صفحة الإصدارات](https://github.com/helghareeb/sada/releases/latest)**:
-
-| النظام | الملف |
-|----|------|
-| 🪟 ويندوز | `Sada-Setup-x.y.z.exe` (مثبِّت) أو `Sada-Portable-x.y.z.exe` (بلا تثبيت) |
-| 🍎 ماك — Apple Silicon | `Sada-x.y.z-mac-arm64.dmg` |
-| 🍎 ماك — إنتل | `Sada-x.y.z-mac-x64.dmg` |
-| 🐧 أوبونتو / منت / دبيان | `Sada-x.y.z-amd64.deb` |
-| 🐧 فيدورا / أوبن‌سوزي | `Sada-x.y.z-x86_64.rpm` |
-| 🐧 أي لينكس آخر | `Sada-x.y.z-x86_64.AppImage` |
-
-**لا شيء آخر عليك تثبيته.** كل نسخة تحمل معها FFmpeg الخاص بها، فيقرأ التطبيق
-ملفاتك بنفسه — بلا حزم ترميز ولا تنزيلات إضافية.
-
-> 📖 **أول مرة تستخدمه؟ اقرأ الدليل خطوة بخطوة: [docs/INSTALL.ar.md](docs/INSTALL.ar.md)**
-> — يشرح كل نظام، وتحذيرات أول تشغيل، وكيفية الحصول على مفتاحك المجاني.
-
-> ⚠️ الإصدارات **غير موقّعة رقمياً**، لذا سيحذّرك ويندوز أو macOS عند أول تشغيل.
-> هذا متوقّع والدليل يشرح تجاوزه؛ فشهادات التوقيع تكلّف مئات الدولارات سنوياً
-> وصدى مجاني.
-
-### 🛠️ البناء من المصدر
-
-```bash
-# المتطلبات: Node.js 18+ و pnpm
-git clone https://github.com/helghareeb/sada.git
-cd sada
-pnpm install
-pnpm build
-pnpm dev:desktop
-```
-
-### 🤝 المساهمة
-
-نرحّب بمساهماتكم — انظر [CONTRIBUTING.md](CONTRIBUTING.md).
-
-### 📜 الرخصة والشكر
-
-رخصة MIT — انظر [LICENSE](LICENSE). صدى مشروع مجتمعي مستقل لإحياء تطبيق **المفرغ**
-المجاني، مع خالص الشكر لمؤلفه الأصلي.
-
-طوّره ويتعهّده **[هيثم الغريب](https://helghareeb.github.io)**
-([جيت​هَب](https://github.com/helghareeb) · [لينكدإن](https://www.linkedin.com/in/helghareeb)) —
-وهو أول منتج مفتوح المصدر ينشره للعموم. المساهمات مرحّب بها.
-
-</div>
